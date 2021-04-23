@@ -80,7 +80,7 @@ my_gtsave("tbl_summary_2")
 ---
 # {gtsummary} + formulas
 
-<p align="center"><img src="images/Dan-SummaryTables-5.png" width=100%></p>
+<p align="center"><img src="https://raw.githubusercontent.com/ddsjoberg/gtsummary-weill-cornell-presentation/5887c81b58f4ed0c76f6ae458243e9c2a2fbbcd2/Images/Dan-SummaryTables-5.png" width=100%></p>
 
 ---
 # Add-on functions in {gtsummary}
@@ -164,7 +164,7 @@ my_gtsave("tbl_summary_3b")
 
 
 ---
-# Update tbl\_summary() with bold\_\*()/italicize\_\*()
+# Update with bold\_\*()/italicize\_\*()
 
 .pull-left[
 ```{r results = FALSE}
