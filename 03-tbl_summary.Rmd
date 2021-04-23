@@ -33,7 +33,7 @@ my_gtsave("tbl_summary_1")
 ]
 
 .pull-right[
-<p align="center"><img src="Images/tbl_summary_1.png" width=65%></p>
+<p align="center"><img src="Images/tbl_summary_1.png" width=55%></p>
 ]
 
 
@@ -80,7 +80,7 @@ my_gtsave("tbl_summary_2")
 ---
 # {gtsummary} + formulas
 
-<p align="center"><img src="images/Dan-SummaryTables-5.png" width=110%></p>
+<p align="center"><img src="images/Dan-SummaryTables-5.png" width=100%></p>
 
 ---
 # Add-on functions in {gtsummary}
