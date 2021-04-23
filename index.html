@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>gtsummary: Beyond the Basics</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Daniel D. Sjoberg" />
+    <meta name="date" content="2021-04-27" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+class: inverse, center, title-slide, middle
+
+# Creating presentation-ready summary tables with {gtsummary}
+
+### Daniel D. Sjoberg
+
+#### April 27, 2021
+
+
+&lt;p align="center"&gt;&lt;img src="Images/White-Transparent.png" width=30%&gt;&lt;/p&gt;
+
+
+---
+# About me
+
+.left-column[
+&lt;img src="Images/bu.svg" width=70%&gt;
+
+&lt;img src="Images/msk-black-logo.png" width=95%&gt;
+
+&lt;img src="Images/CU.jpg" width=50%&gt;
+]
+
+.right-column[
+.medium[
+
+* MA in Biostatistics from the **Boston University**
+
+&lt;br&gt;
+&lt;br&gt;
+
+* Senior Research Biostatistician at **Memorial Sloan Kettering Cancer Center**
+
+&lt;br&gt;
+
+* DrPH Candidate in Biostatistics at  **Columbia University**
+
+]
+
+]
+
+
+---
+
+class: inverse, center, middle
+# Motivation
+
+---
+# The reproducibility crisis
+
+.pull-left[
+.large[
+- Quality of medical research is often low
+
+- **Low quality code** in medical research part of the problem
+
+- Low quality code is more likely to **contain errors**
+
+- Reproducibility is often **cumbersome** and **time-consuming**
+]
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/reproducibility-graphic-online1.jpeg" width=90%&gt;&lt;/p&gt;
+]
+
+.footnote[Image source: https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970]
+
+
+---
+# Need reproducible, presentation-ready tables
+
+&lt;p align="center"&gt;&lt;img src="Images/table1_example.png" width=50%&gt;
+
+
+.small[
+Brierley CK, Zabor EC, Komrokji RS, DeZern AE, Roboz GJ, Brunner AM, Stone RM, Sekeres MA, Steensma DP. Low participation rates and disparities in participation in interventional clinical trials for myelodysplastic syndromes. *Cancer.* 2020 Aug 7. doi: 10.1002/cncr.33105. PMID: 32767690.
+]
+
+
+
+---
+# Our solution: internal package {biostatR}
+
+&lt;img src="Images/msk-black-logo.png" width=60%&gt;
+
+.xxlarge[Department of Epidemiology &amp; Biostatistics]
+
+.large[We thought it was *so good* that we converted it into the public package {gtsummary}!]
+
+
+---
+# {gtsummary} overview
+
+.pull-left[
+* Create **tabular summaries** with sensible defaults but highly customizable
+* Types of summaries:
+  - "Table 1"-types
+  - Cross-tabulation
+  - Regression models
+  - Survival data
+  - Survey data
+  - Custom tables
+
+* Report statistics from {gtsummary} tables **inline** in R Markdown
+* Stack and/or merge any table type
+* Use **themes** to standardize across tables
+* Choose from different **print engines**
+
+]
+
+.pull-right[
+&lt;img src="Images/gtsummary_logo.png" width=80%&gt;
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+# {gtsummary} example dataset
+
+* The `trial` dataset is included with {gtsummary}
+
+* Simulated dataset of baseline characteristics for 200 patients who receive Drug A or Drug B
+
+* Variables were assigned labels using the `labelled` package
+
+
+```r
+library(gtsummary)
+library(tidyverse)
+
+head(trial)
+```
+
+```
+## # A tibble: 6 x 8
+##   trt      age marker stage grade response death ttdeath
+##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;    &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;
+## 1 Drug A    23  0.16  T1    II           0     0    24  
+## 2 Drug B     9  1.11  T2    I            1     0    24  
+## 3 Drug A    31  0.277 T1    II           0     0    24  
+## 4 Drug A    NA  2.07  T3    III          1     1    17.6
+## 5 Drug A    51  2.77  T4    III          1     1    16.4
+## 6 Drug B    39  0.613 T4    I            0     1    15.6
+```
+
+
+---
+# {gtsummary} example dataset
+
+.pull-left[
+
+This presentation will use a subset of the variables.
+
+
+```r
+sm_trial &lt;-
+  trial %&gt;% 
+  select(trt, age, grade, response)
+```
+
+
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/sm_trial_info.png" width=90%&gt;&lt;/p&gt;
+]
+
+
+---
+
+class: inverse, center, middle
+# tbl_summary()
+
+
+---
+# Basic tbl_summary()
+
+.pull-left[
+
+
+```r
+tbl_summary_1 &lt;- 
+  sm_trial %&gt;%
+  select(-trt) %&gt;% 
+  tbl_summary()
+```
+
+
+
+.medium[
+- Four types of summaries: `continuous`, `continuous2`, `categorical`, and `dichotomous`
+
+- Statistics are `median (IQR)` for continuous, `n (%)` for categorical/dichotomous
+
+- Variables coded `0/1`, `TRUE/FALSE`, `Yes/No` treated as dichotomous
+
+- Lists `NA` values under "Unknown"
+
+- Label attributes are printed automatically
+]
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_summary_1.png" width=65%&gt;&lt;/p&gt;
+]
+
+
+---
+# Customize tbl_summary() output
+
+.pull-left[
+
+
+```r
+tbl_summary_2 &lt;-  sm_trial %&gt;%
+  tbl_summary(
+    by = trt,
+    type = age ~ "continuous2",
+    statistic = 
+      list(age ~ c("{mean} ({sd})", "{min}, {max}"), 
+           response ~ "{n} / {N} ({p}%)"),
+    label = grade ~ "Pathologic tumor grade",
+    digits = age ~ 1
+  )
+```
+
+
+
+.medium[
+- `by`: specifies a column variable for cross-tabulation
+
+- `type`: specifies the summary type 
+
+- `statistic`: customize the reported statistics
+
+- `label`: change or customize variable labels
+
+- `digits`: specify the number of decimal places for rounding
+
+]
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_summary_2.png" width=90%&gt;&lt;/p&gt;
+]
+
+---
+# {gtsummary} + formulas
+
+&lt;p align="center"&gt;&lt;img src="images/Dan-SummaryTables-5.png" width=110%&gt;&lt;/p&gt;
+
+---
+# Add-on functions in {gtsummary}
+
+.xlarge[
+`tbl_summary()` objects can also be updated using related functions.
+
+- `add_*()` add additional column of statistics or information, e.g. p-values, q-values, overall statistics, N obs., and more
+
+- `modify_*()` modify table headers, spanning headers, and footnotes
+
+- `bold_*()/italicize_*()` style labels, variable levels, significant p-values
+
+]
+
+
+---
+# Update tbl\_summary() with add\_\*()
+
+.pull-left[
+
+```r
+tbl_summary_3a &lt;- 
+  sm_trial %&gt;%
+  tbl_summary(
+    by = trt
+    ) %&gt;% 
+  add_p() %&gt;% 
+  add_q(
+    method = "bonferroni"
+  )  
+```
+
+
+
+.medium[
+* `add_p()`: adds a column of p-values
+
+* `add_q()`: adds a column of p-values adjusted for multiple comparisons through a call to `p.adjust()`
+]
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_summary_3a.png" width=100%&gt;&lt;/p&gt;
+]
+
+
+---
+# Update tbl\_summary() with add\_\*()
+
+.pull-left[
+
+```r
+tbl_summary_3b &lt;- 
+  sm_trial %&gt;%
+  tbl_summary(
+    by = trt,
+    missing = "no"
+    ) %&gt;% 
+  add_overall() %&gt;% 
+  add_n() %&gt;% 
+  add_stat_label(
+    label = all_categorical() ~ "No. (%)"
+  ) 
+```
+
+
+
+.medium[
+* `add_overall()`: adds a column of overall statistics
+* `add_n()`: adds a column with the sample size 
+* `add_stat_label()`: adds a description of the reported statistic
+]
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_summary_3b.png" width=100%&gt;&lt;/p&gt;
+]
+
+
+---
+# Update tbl\_summary() with bold\_\*()/italicize\_\*()
+
+.pull-left[
+
+```r
+tbl_summary_4 &lt;- 
+  sm_trial %&gt;%
+  tbl_summary(
+    by = trt
+    ) %&gt;%
+  add_p() %&gt;% 
+  bold_labels() %&gt;% 
+  italicize_levels() %&gt;% 
+  bold_p(t = 0.8)
+```
+
+
+
+.medium[
+* `bold_labels()`: bold the variable labels
+* `italicize_levels()`: italicize the variable levels
+* `bold_p()`: bold p-values according a specified threshold
+]
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_summary_4.png" width=100%&gt;&lt;/p&gt;
+]
+
+
+---
+# Update tbl\_summary() with modify\_\*()
+
+.pull-left[
+.tiny[
+
+```r
+tbl_summary_5 &lt;- 
+  sm_trial %&gt;% select(age, response, trt) %&gt;% 
+  tbl_summary(
+    by = trt, missing = "no"
+    ) %&gt;%
+  modify_header(
+    update = list(
+      stat_1 ~ "**A**",
+      stat_2 ~ "**B**"
+    )) %&gt;% 
+  modify_spanning_header(
+    update = all_stat_cols() ~ "**Drug**") %&gt;% 
+  modify_footnote(
+    update = all_stat_cols() ~ 
+      "median (IQR) for continuous; n (%) for categorical"
+  )
+```
+]
+
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_summary_5.png" width=90%&gt;&lt;/p&gt;
+]
+
+* Use `show_header_names()` to see the internal header names available for use in `modify_header()`
+
+
+---
+# Add-on functions in {gtsummary}
+
+.xlarge[
+And many more! 
+
+See the documentation at http://www.danieldsjoberg.com/gtsummary/reference/index.html
+
+And a detailed `tbl_summary()` vignette at http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html
+]
+
+
+
+---
+# Cross-tabulation with tbl_cross()
+
+.large[`tbl_cross()` is a wrapper for `tbl_summary()` for **n x m** tables]
+
+.pull-left[
+&lt;br&gt;
+
+```r
+tbl_cross_1 &lt;-
+  sm_trial %&gt;%
+  tbl_cross(
+    row = trt, 
+    col = grade,
+    percent = "row",
+    margin = "row"
+  ) %&gt;%
+  add_p(source_note = TRUE)
+```
+
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_cross_1.png" width=90%&gt;&lt;/p&gt;
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+class: inverse, center, middle
+# tbl_regression()
+
+---
+# Traditional model summary()
+
+.pull-left[
+
+```r
+m1 &lt;- glm(
+  response ~ age + stage,
+  data = trial,
+  family = binomial(link = "logit")
+  )
+
+summary(m1)
+```
+
+.medium[
+Looks **messy** and it's not easy for others to understand.
+]
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/messy-model-output.png" width=100%&gt;&lt;/p&gt;
+]
+
+
+---
+# Basic tbl_regression()
+
+.pull-left[
+
+```r
+m1_tbl_1 &lt;-
+  tbl_regression(
+    m1
+  )
+```
+
+
+
+.medium[
+- Displays **p-values** for covariates
+
+- Shows **reference levels** for categorical variables
+]
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/m1_tbl_1.png" width=90%&gt;&lt;/p&gt;
+]
+
+
+---
+# Customize tbl_regression() output
+
+.pull-left[
+
+```r
+m1_tbl_2 &lt;-
+  tbl_regression(
+    m1,
+    exponentiate = TRUE
+  ) %&gt;% 
+  add_global_p()
+```
+
+
+
+.medium[
+- Display **odds ratio** estimates and **confidence intervals**
+
+- Add global p-values
+]
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/m1_tbl_2.png" width=90%&gt;&lt;/p&gt;
+]
+
+
+---
+# Supported models in tbl_regression()
+
+.xlarge[
+- From `stats`: `lm()`, `glm()`
+- From `survival`: `coxph()`, `clogit()`, `survreg()`
+- From `lme4`: `glmer()`, `lmer()`
+- From `geepack`: `geeglm()`
+]
+
+
+.large[**Custom tidiers** can be written and passed to `tbl_regression()` using the `tidy_fun` argument.]
+
+
+---
+# Univariate models with tbl_uvregression()
+
+.pull-left[
+
+
+```r
+tbl_uvreg &lt;- 
+  sm_trial %&gt;% 
+  tbl_uvregression(
+    method = glm,
+    y = response,
+    method.args = list(family = binomial),
+    exponentiate = TRUE
+    )
+```
+
+
+
+.medium[
+- Specify  model `method`, `method.args`, and the `response` variable
+
+- Arguments and helper functions like `exponentiate`, `bold_*()`, `add_global_p()` can also be used with `tbl_uvregression()`
+]
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_uvreg.png" width=90%&gt;&lt;/p&gt;
+]
+
+
+
+---
+
+class: inverse, center, middle
+# inline_text()
+
+---
+# {gtsummary} reporting with inline_text()
+.large[
+- Tables are important, but we often need to report results in-line in a report.
+
+- Any statistic reported in a {gtsummary} table can be extracted and reported in-line in an R Markdown document with the `inline_text()` function.
+
+- The pattern of what is reported can be modified with the `pattern = ` argument.  
+
+- Default is `pattern = "{estimate} ({conf.level*100}% CI {conf.low}, {conf.high}; {p.value})"`.
+]
+
+
+---
+# {gtsummary} reporting with inline_text()
+
+&lt;p align="center"&gt;&lt;img src="Images/m1_tbl_2.png" width=30%&gt;&lt;/p&gt;
+
+**In Code:** 
+The odds ratio for age is '` r inline_text(m1_tbl_2, variable = age)`'
+
+**In Report:** 
+The odds ratio for age is 1.02 (95% CI 1.00, 1.04; p=0.087)
+
+
+---
+
+class: inverse, center, middle
+# tbl_merge()/tbl_stack()
+
+---
+# tbl_merge() for side-by-side tables
+
+.pull-left[
+
+A **univariable** table:
+
+
+```r
+library(survival)
+
+tbl_uvsurv &lt;- 
+  trial %&gt;% 
+  select(age, grade, death, ttdeath) %&gt;% 
+  tbl_uvregression(
+    method = coxph,
+    y = Surv(ttdeath, death),
+    exponentiate = TRUE
+  ) %&gt;% 
+  add_global_p()
+```
+
+
+
+]
+
+
+.pull-right[
+
+A **multivariable** table:
+
+
+```r
+library(survival)
+
+tbl_mvsurv &lt;- coxph(
+  Surv(ttdeath, death) ~ 
+    age + grade, 
+  data = trial
+  ) %&gt;% 
+  tbl_regression(
+    exponentiate = TRUE
+  ) %&gt;% 
+  add_global_p() 
+```
+
+
+
+]
+
+---
+# tbl_merge() for side-by-side tables
+
+.pull-left[
+
+A **univariable** table:
+
+&lt;p align="center"&gt;&lt;img src="Images/tbl_uvsurv.png" width=90%&gt;&lt;/p&gt;
+]
+
+.pull-right[
+
+A **multivariable** table:
+
+&lt;p align="center"&gt;&lt;img src="Images/tbl_mvsurv.png" width=85%&gt;&lt;/p&gt;
+]
+
+---
+# tbl_merge() for side-by-side tables
+
+
+```r
+tbl_surv_merge &lt;- tbl_merge(
+  list(tbl_uvsurv, tbl_mvsurv),
+  tab_spanner = c("**Univariable**", "**Multivariable**")
+  )
+```
+
+
+
+&lt;p align="center"&gt;&lt;img src="Images/tbl_surv_merge.png" width=50%&gt;&lt;/p&gt;
+
+---
+# tbl_stack() to combine vertically
+
+.pull-left[
+
+An **unadjusted** model:
+
+
+```r
+t3 &lt;-
+  coxph(Surv(ttdeath, death) ~ 
+          trt, 
+        data = trial) %&gt;%
+  tbl_regression(
+    show_single_row = trt,
+    label = trt ~ "Drug B vs A",
+    exponentiate = TRUE
+    )
+```
+
+
+
+]
+
+.pull-right[
+
+An **adjusted** model:
+
+
+```r
+t4 &lt;-
+  coxph(Surv(ttdeath, death) ~ 
+          trt + grade + stage + marker, 
+        data = trial) %&gt;%
+  tbl_regression(
+    show_single_row = trt,
+    label = trt ~ "Drug B vs A",
+    exponentiate = TRUE, 
+    include = "trt"
+    )
+```
+
+
+]
+
+
+---
+# tbl_stack() to combine vertically
+
+.pull-left[
+
+An **unadjusted** model:
+
+&lt;p align="center"&gt;&lt;img src="Images/t3.png" width=90%&gt;&lt;/p&gt;
+]
+
+.pull-right[
+
+An **adjusted** model:
+
+&lt;p align="center"&gt;&lt;img src="Images/t4.png" width=90%&gt;&lt;/p&gt;
+]
+
+
+---
+# tbl_stack() to combine vertically
+
+
+```r
+tbl_surv_stack &lt;- tbl_stack(
+  list(t3, t4),
+  group_header = c("Unadjusted", "Adjusted")
+  )
+```
+
+
+
+&lt;p align="center"&gt;&lt;img src="Images/tbl_surv_stack.png" width=40%&gt;&lt;/p&gt;
+
+
+
+
+---
+
+class: inverse, center, middle
+# {gtsummary} themes
+
+---
+# {gtsummary} theme basics
+
+.large[
+- A **theme** is a set of customization preferences that can be easily set and reused. 
+
+- Themes control **default settings for existing functions**
+
+- Themes control more **fine-grained customization** not available via arguments or helper functions
+
+- Easily use one of the **available themes**, or **create your own**
+]
+
+
+---
+# {gtsummary} default theme
+
+.pull-left[
+
+
+```r
+reset_gtsummary_theme()
+
+no_theme &lt;- 
+  trial %&gt;%
+  select(age, grade, trt) %&gt;%
+  tbl_summary(by = trt) %&gt;%
+  add_stat_label() %&gt;%
+  add_p() %&gt;%
+  as_gt() %&gt;%
+  gt::tab_header("Default Theme")
+```
+
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/no_theme.png" width=90%&gt;&lt;/p&gt;
+]
+
+
+
+
+---
+# {gtsummary} theme_gtsummary_journal()
+
+.pull-left[
+
+
+```r
+reset_gtsummary_theme()
+
+theme_gtsummary_journal(journal = "jama")
+
+jama_theme &lt;- 
+  trial %&gt;%
+  select(age, grade, trt) %&gt;%
+  tbl_summary(by = trt) %&gt;%
+  add_stat_label() %&gt;%
+  add_p() %&gt;%
+  as_gt() %&gt;%
+  gt::tab_header("Journal Theme (JAMA)")
+```
+
+
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/jama_theme.png" width=90%&gt;&lt;/p&gt;
+]
+
+.medium[
+Journal options include `jama` and `lancet`
+]
+
+
+---
+# {gtsummary} theme_gtsummary_language()
+
+.pull-left[
+
+```r
+reset_gtsummary_theme()
+
+theme_gtsummary_language(language = "hi")
+
+lang_theme &lt;- 
+  trial %&gt;%
+  select(age, grade, trt) %&gt;%
+  tbl_summary(by = trt) %&gt;%
+  add_stat_label() %&gt;%
+  add_p() %&gt;%
+  as_gt() %&gt;%
+  gt::tab_header("Language Theme (Hindi)")
+```
+
+
+
+]
+
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/lang_theme.png" width=90%&gt;&lt;/p&gt;
+]
+
+.medium[
+Language options: "de" (German), "en" (English), "es" (Spanish), "fr" (French), "gu" (Gujarati), "hi" (Hindi), "ja" (Japanese), "mr" (Marathi), "pt" (Portuguese), "se" (Swedish), "zh-cn" (Chinese - Simplified), "zh-tw" (Chinese - Traditional)
+]
+
+
+
+---
+# {gtsummary} theme_gtsummary_compact()
+
+.pull-left[
+
+```r
+reset_gtsummary_theme()
+
+theme_gtsummary_compact()
+
+compact_theme &lt;- 
+  trial %&gt;%
+  select(age, grade, trt) %&gt;%
+  tbl_summary(by = trt) %&gt;%
+  add_stat_label() %&gt;%
+  add_p() %&gt;%
+  as_gt() %&gt;%
+  gt::tab_header("Compact Theme")
+```
+
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/compact_theme.png" width=90%&gt;&lt;/p&gt;
+]
+
+.medium[
+Reduces padding and font size
+]
+
+
+---
+# {gtsummary} set_gtsummary_theme()
+
+
+```r
+my_theme &lt;-
+  list(
+    # Some gt customization
+    "as_gt-lst:addl_cmds" = list(
+      # make the font size small
+      tab_spanner = rlang::expr(gt::tab_options(table.font.size = 'small')),
+      # add a custom title and subtitle to every table
+      user_added1 = rlang::expr(gt::tab_header(
+        title = "Daniel Sjoberg's Table", subtitle = "For Internal Use Only")),
+      # add a custom data source note
+      user_added2 = rlang::expr(gt::tab_source_note(
+        source_note = "Source: very private internal data!")),
+      # stripe the table rows
+      user_added3 = rlang::expr(gt::opt_row_striping()),
+      user_added4 = rlang::expr(gt::opt_table_lines("none"))
+      )
+    )
+```
+
+
+---
+# {gtsummary} set_gtsummary_theme()
+
+
+```r
+returns &lt;- 
+  trial %&gt;%
+  select(age, grade, trt) %&gt;%
+  tbl_summary(by = trt) %&gt;%
+  add_stat_label() %&gt;%
+  add_p() %&gt;%
+  as_gt(return_calls = TRUE) 
+
+returns
+```
+
+&lt;img src="Images/return_calls.png" width=80%&gt;
+
+
+
+---
+# {gtsummary} set_gtsummary_theme()
+
+.pull-left[
+
+```r
+reset_gtsummary_theme()
+
+set_gtsummary_theme(my_theme)
+
+my_theme_tbl &lt;- 
+  trial %&gt;%
+  select(age, grade, trt) %&gt;%
+  tbl_summary(by = trt) %&gt;%
+  add_stat_label() %&gt;%
+  add_p() %&gt;%
+  as_gt() 
+
+my_theme_tbl
+```
+
+
+
+* Made the font size small
+* Added custom title, subtitle, source note
+* Striped the rows
+* Removed all row lines
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/my_theme_tbl.png" width=90%&gt;&lt;/p&gt;
+]
+
+
+---
+# And many more options!
+
+.large[
+See the {gtsummary} + themes vignette: http://www.danieldsjoberg.com/gtsummary/articles/themes.html
+]
+
+
+
+
+
+
+---
+
+class: inverse, center, middle
+# {gtsummary} print engines
+
+
+---
+# {gtsummary} print engines
+
+&lt;p align="center"&gt;&lt;img src="Images/gtsummary_rmarkdown.png" width=90%&gt;&lt;/p&gt;
+
+---
+# Example HTML output
+
+.large[
+**Code**: https://github.com/ddsjoberg/gtsummary-weill-cornell-presentation/blob/master/gtsummary_print_engine_html.Rmd
+
+&lt;!-- **Output**: http://www.emilyzabor.com/gtsummary_print_engine_html.html --&gt;
+]
+
+
+---
+# Example PDF output
+
+.large[
+**Code**: https://github.com/ddsjoberg/gtsummary-weill-cornell-presentation/blob/master/gtsummary_print_engine_pdf.Rmd
+
+&lt;!-- **Output**: http://www.emilyzabor.com/gtsummary_print_engine_pdf.pdf --&gt;
+]
+
+
+---
+# Example RTF output
+
+.large[
+**Code**: https://github.com/ddsjoberg/gtsummary-weill-cornell-presentation/blob/master/gtsummary_print_engine_rtf.Rmd
+
+&lt;!-- **Output**: http://www.emilyzabor.com/gtsummary_print_engine_rtf.rtf --&gt;
+]
+
+
+---
+# Example Word output
+
+.large[
+**Code**: https://github.com/ddsjoberg/gtsummary-weill-cornell-presentation/blob/master/gtsummary_print_engine_word.Rmd
+
+&lt;!-- **Output**: http://www.emilyzabor.com/gtsummary_print_engine_word.docx --&gt;
+]
+
+
+---
+
+class: inverse, center, middle
+# In Closing
+
+
+---
+# {gtsummary} website
+
+.large[http://www.danieldsjoberg.com/gtsummary/]
+
+&lt;p align="center"&gt;&lt;img src="Images/gtsummary_website.png" width=80%&gt;&lt;/p&gt;
+
+
+---
+# {gtsummary} installation
+
+.pull-left[
+Install the production version of {gtsummary} from CRAN:
+
+
+```r
+install.packages("gtsummary")
+```
+
+Install the development version of {gtsummary} from GitHub:
+
+
+```r
+remotes::install_github("ddsjoberg/gtsummary")
+```
+]
+
+
+.pull-right[
+
+![](index_files/figure-html/unnamed-chunk-65-1.png)&lt;!-- --&gt;
+
+]
+
+
+---
+# Thank you
+
+{gtsummary} authors: Daniel Sjoberg (Maintainer), Margaret Hannum, Karissa Whiting, Emily Zabor
+
+&lt;img src="Images/sjoberg.jpg" width=20%&gt;
+&lt;img src="Images/hannum.jpg" width=20%&gt;
+&lt;img src="Images/whiting.jpg" width=20%&gt;
+&lt;img src="Images/zabor.jpg" width=20%&gt;
+
+{gtsummary} contributors (not pictured): Michael Curry, Esther Drill, Jessica Flynn, Joseph Larmarange, Stephanie Lobaugh, Gustavo Zapata Wainberg
+
+Special thanks to Dan Sjoberg and Margie Hannum for sharing materials from previous {gtsummary} talks!
+
+R/Medicine, August 28, 2020: http://www.danieldsjoberg.com/rmedicine-gtsummary
+
+RLadies NYC, February 26, 2020: https://margarethannum.com/gtsummary-presentation-rladies
+
+&lt;br&gt;
+
+.medium[
+&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt;: @statistishdan,    &lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt;: @ddsjoberg
+]
+
+---
+class: inverse, center, middle
+# New in v1.3.5 (Released 2020-09-29)!
+
+
+---
+# New summary type continuous2
+.pull-left[
+
+
+```r
+tbl_summary_n1 &lt;- 
+  sm_trial %&gt;%
+  select(-trt) %&gt;% 
+  tbl_summary(
+    type = age ~ "continuous2",
+    statistic = all_continuous2() ~ "{mean} ({sd})"
+  )
+```
+
+
+
+.medium[
+- Prints the continuous summary on the line below the variable label
+
+- Function `all_continuous2()` for selecting all `continuous2` type variables
+
+- `theme_gtsummary_continuous2()` makes `continuous2` the default summary type for all continuous variables
+]
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_summary_n1.png" width=45%&gt;&lt;/p&gt;
+]
+
+
+---
+# New function add_glance_source_note()
+
+
+```r
+m1 &lt;- 
+  glm(
+  response ~ age + stage,
+  data = trial,
+  family = binomial(link = "logit")
+  ) 
+
+broom::glance(m1)
+```
+
+```
+## # A tibble: 1 x 8
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs
+##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
+## 1          229.     182  -112.  234.  250.     224.         178   183
+```
+
+
+---
+# New function add_glance_source_note()
+
+
+```r
+m1_tbl_n1 &lt;-
+  tbl_regression(
+    m1,
+    exponentiate = TRUE
+  ) %&gt;% 
+  add_glance_source_note()
+```
+
+
+
+&lt;p align="center"&gt;&lt;img src="Images/m1_tbl_n1.png" width=70%&gt;&lt;/p&gt;
+
+
+---
+# And more...
+
+See package News for full details: http://www.danieldsjoberg.com/gtsummary/news/index.html
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
