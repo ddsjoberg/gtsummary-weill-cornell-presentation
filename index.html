@@ -18,7 +18,7 @@
 
 class: inverse, center, title-slide, middle
 
-# Creating presentation-ready summary tables with {gtsummary}
+# Presentation-ready Summary Tables with {gtsummary}
 
 ### Daniel D. Sjoberg
 
@@ -27,6 +27,10 @@ class: inverse, center, title-slide, middle
 
 &lt;p align="center"&gt;&lt;img src="Images/White-Transparent.png" width=30%&gt;&lt;/p&gt;
 
+.medium[
+&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#FFFFFF;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt; @statistishdan
+&lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#FFFFFF;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; @ddsjoberg
+]
 
 ---
 # About me
@@ -280,7 +284,7 @@ tbl_summary_2 &lt;-  sm_trial %&gt;%
 ---
 # {gtsummary} + formulas
 
-&lt;p align="center"&gt;&lt;img src="https://raw.githubusercontent.com/ddsjoberg/gtsummary-weill-cornell-presentation/5887c81b58f4ed0c76f6ae458243e9c2a2fbbcd2/Images/Dan-SummaryTables-5.png" width=50%&gt;&lt;/p&gt;
+&lt;p align="center"&gt;&lt;img src="https://raw.githubusercontent.com/ddsjoberg/gtsummary-weill-cornell-presentation/5887c81b58f4ed0c76f6ae458243e9c2a2fbbcd2/Images/Dan-SummaryTables-5.png" width=95%&gt;&lt;/p&gt;
 
 ---
 # Add-on functions in {gtsummary}
@@ -309,9 +313,7 @@ tbl_summary_3a &lt;-
     by = trt
     ) %&gt;% 
   add_p() %&gt;% 
-  add_q(
-    method = "bonferroni"
-  )  
+  add_q(method = "bonferroni")  
 ```
 
 
@@ -326,6 +328,36 @@ tbl_summary_3a &lt;-
 .pull-right[
 &lt;p align="center"&gt;&lt;img src="Images/tbl_summary_3a.png" width=100%&gt;&lt;/p&gt;
 ]
+
+---
+# Update tbl\_summary() with add\_\*()
+
+.pull-left[
+
+```r
+tbl_summary_3ab &lt;- 
+  trial %&gt;%
+  select(trt, marker, response) %&gt;%
+  tbl_summary(
+    by = trt,
+    statistic = list(marker ~ "{mean} ({sd})",
+                     response ~ "{p}%"),
+    missing = "no"
+    ) %&gt;% 
+  add_difference()
+```
+
+
+
+]
+
+.pull-right[
+.medium[
+* `add_difference()`: mean and rate differences between two groups. Can also be adjusted differences
+]
+]
+
+&lt;p align="center"&gt;&lt;img src="Images/tbl_summary_3ab.png" width=65%&gt;&lt;/p&gt;
 
 
 ---
@@ -360,6 +392,34 @@ tbl_summary_3b &lt;-
 &lt;p align="center"&gt;&lt;img src="Images/tbl_summary_3b.png" width=100%&gt;&lt;/p&gt;
 ]
 
+---
+# Update tbl\_summary() with add\_\*()
+
+.pull-left[
+
+```r
+tbl_summary_3b &lt;- 
+  sm_trial %&gt;%
+  select(age, marker, trt)
+  tbl_summary(
+    by = trt,
+    missing = "no"
+    ) %&gt;% 
+  add_stat(...)
+```
+
+.large[
+- Customize statistics presented with `add_stat()`
+
+  - Added statistics can be placed on the label or the level rows
+  
+  - Added statistics may be a single column or multiple
+]
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/add_stat_ex2.png" width=100%&gt;&lt;/p&gt;
+]
 
 ---
 # Update with bold\_\*()/italicize\_\*()
@@ -548,7 +608,8 @@ m1_tbl_2 &lt;-
     m1,
     exponentiate = TRUE
   ) %&gt;% 
-  add_global_p()
+  add_global_p() %&gt;%
+  add_glance_table(include = c(nobs, logLik, AIC, BIC))
 ```
 
 
@@ -557,6 +618,8 @@ m1_tbl_2 &lt;-
 - Display **odds ratio** estimates and **confidence intervals**
 
 - Add global p-values
+
+- Add various model statistics
 ]
 ]
 
@@ -569,14 +632,11 @@ m1_tbl_2 &lt;-
 # Supported models in tbl_regression()
 
 .xlarge[
-- From `stats`: `lm()`, `glm()`
-- From `survival`: `coxph()`, `clogit()`, `survreg()`
-- From `lme4`: `glmer()`, `lmer()`
-- From `geepack`: `geeglm()`
+`stats::lm()`, `stats::glm()`, `stats::aov()`, `ordinal::clm()`, `ordinal::clmm()`, `survival::coxph()`, `survival::survreg()`, `survival::clogit()`, `lme4::lmer()`, `lme4::glmer()`, `lme4::glmer.nb()`, `brms::brm()`, `geepack::geeglm()`, `gam::gam()`, `mgcv::gam()`, `nnet::multinom()`, `survey::svyglm()`, `survey::svycoxph()`, `survey::svyolr()`, `MASS::polr()`, `MASS::glm.nb()`, `mice::mira`, `lavaan::lavaan()`, `cmprsk::crr()`, `stats::nls()`, `lfe::felm()`, `rstanarm::stan_glm()`, `VGAM::vglm()`, and more!
 ]
 
 
-.large[**Custom tidiers** can be written and passed to `tbl_regression()` using the `tidy_fun` argument.]
+.large[**Custom tidiers** can be written and passed to `tbl_regression()` using the `tidy_fun=` argument.]
 
 
 ---
@@ -808,6 +868,34 @@ tbl_surv_stack &lt;- tbl_stack(
 &lt;p align="center"&gt;&lt;img src="Images/tbl_surv_stack.png" width=40%&gt;&lt;/p&gt;
 
 
+---
+# tbl_strata() for stratified tables
+
+
+```r
+tbl_strata &lt;- 
+  sm_trial %&gt;%
+  mutate(grade = paste("Grade", grade)) %&gt;%
+  tbl_strata(
+    strata = grade,
+    ~tbl_summary(.x, by = trt, missing = "no") %&gt;%
+      modify_header(all_stat_cols() ~ "**{level}**")
+  )
+```
+
+
+
+&lt;p align="center"&gt;&lt;img src="Images/tbl_strata.png" width=85%&gt;&lt;/p&gt;
+
+---
+# Define custom function `tbl_cmh()`
+
+&lt;p align="center"&gt;&lt;img src="Images/tbl_cmh.png" width=68%&gt;&lt;/p&gt;
+
+---
+# Define custom functiont `tbl_cmh()`
+
+&lt;p align="center"&gt;&lt;img src="Images/tbl_cmh_markup.png" width=68%&gt;&lt;/p&gt;
 
 
 ---
@@ -839,20 +927,15 @@ class: inverse, center, middle
 reset_gtsummary_theme()
 
 no_theme &lt;- 
-  trial %&gt;%
-  select(age, grade, trt) %&gt;%
-  tbl_summary(by = trt) %&gt;%
-  add_stat_label() %&gt;%
-  add_p() %&gt;%
-  as_gt() %&gt;%
-  gt::tab_header("Default Theme")
+  tbl_regression(m1, exponentiate = TRUE) %&gt;%
+  modify_caption("Default Theme")
 ```
 
 
 ]
 
 .pull-right[
-&lt;p align="center"&gt;&lt;img src="Images/no_theme.png" width=90%&gt;&lt;/p&gt;
+&lt;p align="center"&gt;&lt;img src="Images/no_theme.png" width=80%&gt;&lt;/p&gt;
 ]
 
 
@@ -870,13 +953,8 @@ reset_gtsummary_theme()
 theme_gtsummary_journal(journal = "jama")
 
 jama_theme &lt;- 
-  trial %&gt;%
-  select(age, grade, trt) %&gt;%
-  tbl_summary(by = trt) %&gt;%
-  add_stat_label() %&gt;%
-  add_p() %&gt;%
-  as_gt() %&gt;%
-  gt::tab_header("Journal Theme (JAMA)")
+  tbl_regression(m1, exponentiate = TRUE) %&gt;%
+  modify_caption("Journal Theme (JAMA)")
 ```
 
 
@@ -884,11 +962,11 @@ jama_theme &lt;-
 ]
 
 .pull-right[
-&lt;p align="center"&gt;&lt;img src="Images/jama_theme.png" width=90%&gt;&lt;/p&gt;
+&lt;p align="center"&gt;&lt;img src="Images/jama_theme.png" width=80%&gt;&lt;/p&gt;
 ]
 
 .medium[
-Journal options include `jama` and `lancet`
+Contributions welcome!
 ]
 
 
@@ -900,16 +978,11 @@ Journal options include `jama` and `lancet`
 ```r
 reset_gtsummary_theme()
 
-theme_gtsummary_language(language = "hi")
+theme_gtsummary_language(language = "zh-tw")
 
 lang_theme &lt;- 
-  trial %&gt;%
-  select(age, grade, trt) %&gt;%
-  tbl_summary(by = trt) %&gt;%
-  add_stat_label() %&gt;%
-  add_p() %&gt;%
-  as_gt() %&gt;%
-  gt::tab_header("Language Theme (Hindi)")
+  tbl_regression(m1, exponentiate = TRUE) %&gt;%
+  modify_caption("Language Theme (Chinese)")
 ```
 
 
@@ -918,11 +991,11 @@ lang_theme &lt;-
 
 
 .pull-right[
-&lt;p align="center"&gt;&lt;img src="Images/lang_theme.png" width=90%&gt;&lt;/p&gt;
+&lt;p align="center"&gt;&lt;img src="Images/lang_theme.png" width=66%&gt;&lt;/p&gt;
 ]
 
 .medium[
-Language options: "de" (German), "en" (English), "es" (Spanish), "fr" (French), "gu" (Gujarati), "hi" (Hindi), "ja" (Japanese), "mr" (Marathi), "pt" (Portuguese), "se" (Swedish), "zh-cn" (Chinese - Simplified), "zh-tw" (Chinese - Traditional)
+Language options: "de" (German), "en" (English), "es" (Spanish), "fr" (French), "gu" (Gujarati), "hi" (Hindi), "is" (Icelandic),"ja" (Japanese), "kr" (Korean), "mr" (Marathi), "pt" (Portuguese), "se" (Swedish), "zh-cn" (Chinese Simplified), "zh-tw" (Chinese Traditional)
 ]
 
 
@@ -938,20 +1011,15 @@ reset_gtsummary_theme()
 theme_gtsummary_compact()
 
 compact_theme &lt;- 
-  trial %&gt;%
-  select(age, grade, trt) %&gt;%
-  tbl_summary(by = trt) %&gt;%
-  add_stat_label() %&gt;%
-  add_p() %&gt;%
-  as_gt() %&gt;%
-  gt::tab_header("Compact Theme")
+  tbl_regression(m1, exponentiate = TRUE) %&gt;%
+  modify_caption("Compact Theme")
 ```
 
 
 ]
 
 .pull-right[
-&lt;p align="center"&gt;&lt;img src="Images/compact_theme.png" width=90%&gt;&lt;/p&gt;
+&lt;p align="center"&gt;&lt;img src="Images/compact_theme.png" width=80%&gt;&lt;/p&gt;
 ]
 
 .medium[
@@ -966,42 +1034,24 @@ Reduces padding and font size
 ```r
 my_theme &lt;-
   list(
+    # round large pvalues to 2 places
+    "pkgwide-fn:pvalue_fun" = function(x) gtsummary::style_pvalue(x, digits = 2),
     # Some gt customization
     "as_gt-lst:addl_cmds" = list(
       # make the font size small
       tab_spanner = rlang::expr(gt::tab_options(table.font.size = 'small')),
       # add a custom title and subtitle to every table
       user_added1 = rlang::expr(gt::tab_header(
-        title = "Daniel Sjoberg's Table", subtitle = "For Internal Use Only")),
+        title = "ACME Corp.", subtitle = "For Internal Use Only")),
       # add a custom data source note
       user_added2 = rlang::expr(gt::tab_source_note(
-        source_note = "Source: very private internal data!")),
+        source_note = paste("Table created", Sys.Date()))),
       # stripe the table rows
       user_added3 = rlang::expr(gt::opt_row_striping()),
       user_added4 = rlang::expr(gt::opt_table_lines("none"))
-      )
     )
+  )
 ```
-
-
----
-# {gtsummary} set_gtsummary_theme()
-
-
-```r
-returns &lt;- 
-  trial %&gt;%
-  select(age, grade, trt) %&gt;%
-  tbl_summary(by = trt) %&gt;%
-  add_stat_label() %&gt;%
-  add_p() %&gt;%
-  as_gt(return_calls = TRUE) 
-
-returns
-```
-
-&lt;img src="Images/return_calls.png" width=80%&gt;
-
 
 
 ---
@@ -1015,14 +1065,8 @@ reset_gtsummary_theme()
 set_gtsummary_theme(my_theme)
 
 my_theme_tbl &lt;- 
-  trial %&gt;%
-  select(age, grade, trt) %&gt;%
-  tbl_summary(by = trt) %&gt;%
-  add_stat_label() %&gt;%
-  add_p() %&gt;%
-  as_gt() 
-
-my_theme_tbl
+  tbl_regression(m1, exponentiate = TRUE) %&gt;%
+  modify_caption("My Theme")
 ```
 
 
@@ -1034,7 +1078,7 @@ my_theme_tbl
 ]
 
 .pull-right[
-&lt;p align="center"&gt;&lt;img src="Images/my_theme_tbl.png" width=90%&gt;&lt;/p&gt;
+&lt;p align="center"&gt;&lt;img src="Images/my_theme_tbl.png" width=70%&gt;&lt;/p&gt;
 ]
 
 
@@ -1061,44 +1105,6 @@ class: inverse, center, middle
 
 &lt;p align="center"&gt;&lt;img src="Images/gtsummary_rmarkdown.png" width=90%&gt;&lt;/p&gt;
 
----
-# Example HTML output
-
-.large[
-**Code**: https://github.com/ddsjoberg/gtsummary-weill-cornell-presentation/blob/master/gtsummary_print_engine_html.Rmd
-
-&lt;!-- **Output**: http://www.emilyzabor.com/gtsummary_print_engine_html.html --&gt;
-]
-
-
----
-# Example PDF output
-
-.large[
-**Code**: https://github.com/ddsjoberg/gtsummary-weill-cornell-presentation/blob/master/gtsummary_print_engine_pdf.Rmd
-
-&lt;!-- **Output**: http://www.emilyzabor.com/gtsummary_print_engine_pdf.pdf --&gt;
-]
-
-
----
-# Example RTF output
-
-.large[
-**Code**: https://github.com/ddsjoberg/gtsummary-weill-cornell-presentation/blob/master/gtsummary_print_engine_rtf.Rmd
-
-&lt;!-- **Output**: http://www.emilyzabor.com/gtsummary_print_engine_rtf.rtf --&gt;
-]
-
-
----
-# Example Word output
-
-.large[
-**Code**: https://github.com/ddsjoberg/gtsummary-weill-cornell-presentation/blob/master/gtsummary_print_engine_word.Rmd
-
-&lt;!-- **Output**: http://www.emilyzabor.com/gtsummary_print_engine_word.docx --&gt;
-]
 
 
 ---
@@ -1119,14 +1125,16 @@ class: inverse, center, middle
 # {gtsummary} installation
 
 .pull-left[
-Install the production version of {gtsummary} from CRAN:
+Install production version from CRAN:
 
 
 ```r
 install.packages("gtsummary")
 ```
+]
+.pull-right[
 
-Install the development version of {gtsummary} from GitHub:
+Install development version from GitHub:
 
 
 ```r
@@ -1134,120 +1142,31 @@ remotes::install_github("ddsjoberg/gtsummary")
 ```
 ]
 
-
-.pull-right[
-
-![](index_files/figure-html/unnamed-chunk-65-1.png)&lt;!-- --&gt;
-
-]
-
+&lt;p align="center"&gt;&lt;img src="Images/cran-downloads.png" width=80%&gt;&lt;/p&gt;
 
 ---
 # Thank you
 
-{gtsummary} authors: Daniel Sjoberg (Maintainer), Margaret Hannum, Karissa Whiting, Emily Zabor
+{gtsummary} authors/contributors: Daniel Sjoberg (Maintainer), Karissa Whiting, Michael Curry, Joseph Larmarange, Emily Zabor
 
 &lt;img src="Images/sjoberg.jpg" width=20%&gt;
-&lt;img src="Images/hannum.jpg" width=20%&gt;
 &lt;img src="Images/whiting.jpg" width=20%&gt;
+&lt;img src="Images/curry.jpg" width=20%&gt;
+&lt;img src="Images/larmarange.jpg" width=13.5%&gt;
 &lt;img src="Images/zabor.jpg" width=20%&gt;
 
-{gtsummary} contributors (not pictured): Michael Curry, Esther Drill, Jessica Flynn, Joseph Larmarange, Stephanie Lobaugh, Gustavo Zapata Wainberg
+(not pictured): Margaret Hannum, Esther Drill, Jessica Flynn, Stephanie Lobaugh, Gustavo Zapata Wainberg
 
-Special thanks to Dan Sjoberg and Margie Hannum for sharing materials from previous {gtsummary} talks!
-
-R/Medicine, August 28, 2020: http://www.danieldsjoberg.com/rmedicine-gtsummary
-
-RLadies NYC, February 26, 2020: https://margarethannum.com/gtsummary-presentation-rladies
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 &lt;br&gt;
 
 .medium[
-&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt;: @statistishdan,    &lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt;: @ddsjoberg
+&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt; @statistishdan,    &lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; @ddsjoberg
 ]
-
----
-class: inverse, center, middle
-# New in v1.3.5 (Released 2020-09-29)!
-
-
----
-# New summary type continuous2
-.pull-left[
-
-
-```r
-tbl_summary_n1 &lt;- 
-  sm_trial %&gt;%
-  select(-trt) %&gt;% 
-  tbl_summary(
-    type = age ~ "continuous2",
-    statistic = all_continuous2() ~ "{mean} ({sd})"
-  )
-```
-
-
-
-.medium[
-- Prints the continuous summary on the line below the variable label
-
-- Function `all_continuous2()` for selecting all `continuous2` type variables
-
-- `theme_gtsummary_continuous2()` makes `continuous2` the default summary type for all continuous variables
-]
-
-]
-
-.pull-right[
-&lt;p align="center"&gt;&lt;img src="Images/tbl_summary_n1.png" width=45%&gt;&lt;/p&gt;
-]
-
-
----
-# New function add_glance_source_note()
-
-
-```r
-m1 &lt;- 
-  glm(
-  response ~ age + stage,
-  data = trial,
-  family = binomial(link = "logit")
-  ) 
-
-broom::glance(m1)
-```
-
-```
-## # A tibble: 1 x 8
-##   null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs
-##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
-## 1          229.     182  -112.  234.  250.     224.         178   183
-```
-
-
----
-# New function add_glance_source_note()
-
-
-```r
-m1_tbl_n1 &lt;-
-  tbl_regression(
-    m1,
-    exponentiate = TRUE
-  ) %&gt;% 
-  add_glance_source_note()
-```
-
-
-
-&lt;p align="center"&gt;&lt;img src="Images/m1_tbl_n1.png" width=70%&gt;&lt;/p&gt;
-
-
----
-# And more...
-
-See package News for full details: http://www.danieldsjoberg.com/gtsummary/news/index.html
 
 
 

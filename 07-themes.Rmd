@@ -24,13 +24,8 @@ class: inverse, center, middle
 reset_gtsummary_theme()
 
 no_theme <- 
-  trial %>%
-  select(age, grade, trt) %>%
-  tbl_summary(by = trt) %>%
-  add_stat_label() %>%
-  add_p() %>%
-  as_gt() %>%
-  gt::tab_header("Default Theme")
+  tbl_regression(m1, exponentiate = TRUE) %>%
+  modify_caption("Default Theme")
 ```
 
 ```{r include = FALSE}
@@ -39,7 +34,7 @@ my_gtsave("no_theme")
 ]
 
 .pull-right[
-<p align="center"><img src="Images/no_theme.png" width=90%></p>
+<p align="center"><img src="Images/no_theme.png" width=80%></p>
 ]
 
 
@@ -56,13 +51,8 @@ reset_gtsummary_theme()
 theme_gtsummary_journal(journal = "jama")
 
 jama_theme <- 
-  trial %>%
-  select(age, grade, trt) %>%
-  tbl_summary(by = trt) %>%
-  add_stat_label() %>%
-  add_p() %>%
-  as_gt() %>%
-  gt::tab_header("Journal Theme (JAMA)")
+  tbl_regression(m1, exponentiate = TRUE) %>%
+  modify_caption("Journal Theme (JAMA)")
 ```
 
 ```{r include = FALSE}
@@ -72,11 +62,11 @@ my_gtsave("jama_theme")
 ]
 
 .pull-right[
-<p align="center"><img src="Images/jama_theme.png" width=90%></p>
+<p align="center"><img src="Images/jama_theme.png" width=80%></p>
 ]
 
 .medium[
-Journal options include `jama` and `lancet`
+Contributions welcome!
 ]
 
 
@@ -87,16 +77,11 @@ Journal options include `jama` and `lancet`
 ```{r results=FALSE, message = FALSE}
 reset_gtsummary_theme()
 
-theme_gtsummary_language(language = "hi")
+theme_gtsummary_language(language = "zh-tw")
 
 lang_theme <- 
-  trial %>%
-  select(age, grade, trt) %>%
-  tbl_summary(by = trt) %>%
-  add_stat_label() %>%
-  add_p() %>%
-  as_gt() %>%
-  gt::tab_header("Language Theme (Hindi)")
+  tbl_regression(m1, exponentiate = TRUE) %>%
+  modify_caption("Language Theme (Chinese)")
 ```
 
 ```{r include = FALSE}
@@ -107,11 +92,11 @@ my_gtsave("lang_theme")
 
 
 .pull-right[
-<p align="center"><img src="Images/lang_theme.png" width=90%></p>
+<p align="center"><img src="Images/lang_theme.png" width=66%></p>
 ]
 
 .medium[
-Language options: "de" (German), "en" (English), "es" (Spanish), "fr" (French), "gu" (Gujarati), "hi" (Hindi), "ja" (Japanese), "mr" (Marathi), "pt" (Portuguese), "se" (Swedish), "zh-cn" (Chinese - Simplified), "zh-tw" (Chinese - Traditional)
+Language options: "de" (German), "en" (English), "es" (Spanish), "fr" (French), "gu" (Gujarati), "hi" (Hindi), "is" (Icelandic),"ja" (Japanese), "kr" (Korean), "mr" (Marathi), "pt" (Portuguese), "se" (Swedish), "zh-cn" (Chinese Simplified), "zh-tw" (Chinese Traditional)
 ]
 
 
@@ -126,13 +111,8 @@ reset_gtsummary_theme()
 theme_gtsummary_compact()
 
 compact_theme <- 
-  trial %>%
-  select(age, grade, trt) %>%
-  tbl_summary(by = trt) %>%
-  add_stat_label() %>%
-  add_p() %>%
-  as_gt() %>%
-  gt::tab_header("Compact Theme")
+  tbl_regression(m1, exponentiate = TRUE) %>%
+  modify_caption("Compact Theme")
 ```
 
 ```{r include = FALSE}
@@ -141,7 +121,7 @@ my_gtsave("compact_theme")
 ]
 
 .pull-right[
-<p align="center"><img src="Images/compact_theme.png" width=90%></p>
+<p align="center"><img src="Images/compact_theme.png" width=80%></p>
 ]
 
 .medium[
@@ -155,41 +135,24 @@ Reduces padding and font size
 ```{r}
 my_theme <-
   list(
+    # round large pvalues to 2 places
+    "pkgwide-fn:pvalue_fun" = function(x) gtsummary::style_pvalue(x, digits = 2),
     # Some gt customization
     "as_gt-lst:addl_cmds" = list(
       # make the font size small
       tab_spanner = rlang::expr(gt::tab_options(table.font.size = 'small')),
       # add a custom title and subtitle to every table
       user_added1 = rlang::expr(gt::tab_header(
-        title = "Daniel Sjoberg's Table", subtitle = "For Internal Use Only")),
+        title = "ACME Corp.", subtitle = "For Internal Use Only")),
       # add a custom data source note
       user_added2 = rlang::expr(gt::tab_source_note(
-        source_note = "Source: very private internal data!")),
+        source_note = paste("Table created", Sys.Date()))),
       # stripe the table rows
       user_added3 = rlang::expr(gt::opt_row_striping()),
       user_added4 = rlang::expr(gt::opt_table_lines("none"))
-      )
     )
+  )
 ```
-
-
----
-# {gtsummary} set_gtsummary_theme()
-
-```{r results = FALSE, eval = FALSE}
-returns <- 
-  trial %>%
-  select(age, grade, trt) %>%
-  tbl_summary(by = trt) %>%
-  add_stat_label() %>%
-  add_p() %>%
-  as_gt(return_calls = TRUE) 
-
-returns
-```
-
-<img src="Images/return_calls.png" width=80%>
-
 
 
 ---
@@ -202,14 +165,8 @@ reset_gtsummary_theme()
 set_gtsummary_theme(my_theme)
 
 my_theme_tbl <- 
-  trial %>%
-  select(age, grade, trt) %>%
-  tbl_summary(by = trt) %>%
-  add_stat_label() %>%
-  add_p() %>%
-  as_gt() 
-
-my_theme_tbl
+  tbl_regression(m1, exponentiate = TRUE) %>%
+  modify_caption("My Theme")
 ```
 
 ```{r include = FALSE}
@@ -223,7 +180,7 @@ my_gtsave("my_theme_tbl")
 ]
 
 .pull-right[
-<p align="center"><img src="Images/my_theme_tbl.png" width=90%></p>
+<p align="center"><img src="Images/my_theme_tbl.png" width=70%></p>
 ]
 
 

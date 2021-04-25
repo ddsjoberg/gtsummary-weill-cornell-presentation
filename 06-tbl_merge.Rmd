@@ -169,3 +169,32 @@ my_gtsave("tbl_surv_stack")
 <p align="center"><img src="Images/tbl_surv_stack.png" width=40%></p>
 
 
+---
+# tbl_strata() for stratified tables
+
+```{r results = FALSE}
+tbl_strata <- 
+  sm_trial %>%
+  mutate(grade = paste("Grade", grade)) %>%
+  tbl_strata(
+    strata = grade,
+    ~tbl_summary(.x, by = trt, missing = "no") %>%
+      modify_header(all_stat_cols() ~ "**{level}**")
+  )
+```
+
+```{r include=FALSE}
+my_gtsave("tbl_strata")
+```
+
+<p align="center"><img src="Images/tbl_strata.png" width=85%></p>
+
+---
+# Define custom function `tbl_cmh()`
+
+<p align="center"><img src="Images/tbl_cmh.png" width=68%></p>
+
+---
+# Define custom functiont `tbl_cmh()`
+
+<p align="center"><img src="Images/tbl_cmh_markup.png" width=68%></p>

@@ -80,7 +80,7 @@ my_gtsave("tbl_summary_2")
 ---
 # {gtsummary} + formulas
 
-<p align="center"><img src="https://raw.githubusercontent.com/ddsjoberg/gtsummary-weill-cornell-presentation/5887c81b58f4ed0c76f6ae458243e9c2a2fbbcd2/Images/Dan-SummaryTables-5.png" width=50%></p>
+<p align="center"><img src="https://raw.githubusercontent.com/ddsjoberg/gtsummary-weill-cornell-presentation/5887c81b58f4ed0c76f6ae458243e9c2a2fbbcd2/Images/Dan-SummaryTables-5.png" width=95%></p>
 
 ---
 # Add-on functions in {gtsummary}
@@ -108,9 +108,7 @@ tbl_summary_3a <-
     by = trt
     ) %>% 
   add_p() %>% 
-  add_q(
-    method = "bonferroni"
-  )  
+  add_q(method = "bonferroni")  
 ```
 
 ```{r include = FALSE}
@@ -127,6 +125,37 @@ my_gtsave("tbl_summary_3a")
 .pull-right[
 <p align="center"><img src="Images/tbl_summary_3a.png" width=100%></p>
 ]
+
+---
+# Update tbl\_summary() with add\_\*()
+
+.pull-left[
+```{r results = FALSE, message = FALSE}
+tbl_summary_3ab <- 
+  trial %>%
+  select(trt, marker, response) %>%
+  tbl_summary(
+    by = trt,
+    statistic = list(marker ~ "{mean} ({sd})",
+                     response ~ "{p}%"),
+    missing = "no"
+    ) %>% 
+  add_difference()
+```
+
+```{r include = FALSE}
+my_gtsave("tbl_summary_3ab")
+```
+
+]
+
+.pull-right[
+.medium[
+* `add_difference()`: mean and rate differences between two groups. Can also be adjusted differences
+]
+]
+
+<p align="center"><img src="Images/tbl_summary_3ab.png" width=65%></p>
 
 
 ---
@@ -162,6 +191,33 @@ my_gtsave("tbl_summary_3b")
 <p align="center"><img src="Images/tbl_summary_3b.png" width=100%></p>
 ]
 
+---
+# Update tbl\_summary() with add\_\*()
+
+.pull-left[
+```{r results = FALSE, eval = FALSE}
+tbl_summary_3b <- 
+  sm_trial %>%
+  select(age, marker, trt)
+  tbl_summary(
+    by = trt,
+    missing = "no"
+    ) %>% 
+  add_stat(...)
+```
+
+.large[
+- Customize statistics presented with `add_stat()`
+
+  - Added statistics can be placed on the label or the level rows
+  
+  - Added statistics may be a single column or multiple
+]
+]
+
+.pull-right[
+<p align="center"><img src="Images/add_stat_ex2.png" width=100%></p>
+]
 
 ---
 # Update with bold\_\*()/italicize\_\*()
