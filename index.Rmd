@@ -57,35 +57,6 @@ class: inverse, center, title-slide, middle
 `r icons::fontawesome("github")  %>% icons::icon_style(fill = "#FFFFFF")` @ddsjoberg
 ]
 
----
-# About me
-
-.left-column[
-<img src="Images/bu.svg" width=70%>
-
-<img src="Images/msk-black-logo.png" width=95%>
-
-<img src="Images/CU.jpg" width=50%>
-]
-
-.right-column[
-.medium[
-
-* MA in Biostatistics from the **Boston University**
-
-<br>
-<br>
-
-* Senior Research Biostatistician at **Memorial Sloan Kettering Cancer Center**
-
-<br>
-
-* DrPH Candidate in Biostatistics at  **Columbia University**
-
-]
-
-]
-
 
 ---
 ```{r child='01-background.Rmd'}
