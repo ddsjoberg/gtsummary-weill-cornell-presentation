@@ -44,10 +44,12 @@ remotes::install_github("ddsjoberg/gtsummary")
 
 (not pictured): Margaret Hannum, Esther Drill, Jessica Flynn, Stephanie Lobaugh, Gustavo Zapata Wainberg
 
-<br>
-<br>
-<br>
-<br>
+#### gtsummary questions?
+
+.medium[
+`r icons::fontawesome("stack-overflow")` Ask on [stackoverflow.com](stackoverflow.com). Hundreds of Qs already answered!
+]
+
 <br>
 <br>
 

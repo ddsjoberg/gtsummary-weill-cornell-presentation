@@ -10,7 +10,7 @@ class: inverse, center, middle
 ---
 # {gtsummary} print engines
 
-Use any print engine to make customize table
+Use any print engine to customize table
 
 .pull-left[
 ```{r}
