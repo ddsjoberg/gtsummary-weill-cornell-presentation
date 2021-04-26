@@ -7,3 +7,30 @@ class: inverse, center, middle
 
 <p align="center"><img src="Images/gtsummary_rmarkdown.png" width=90%></p>
 
+---
+# {gtsummary} print engines
+
+Use any print engine to make customize table
+
+.pull-left[
+```{r}
+library(gt, warn.conflicts = FALSE)
+
+print_engine <-
+  trial %>%
+  select(age, grade) %>%
+  tbl_summary() %>%
+  as_gt() %>%
+  cols_width(label ~ px(300)) %>%
+  cols_align(columns = vars(stat_0), 
+             align = "left")
+```
+
+```{r, include=FALSE}
+my_gtsave("print_engine")
+```
+]
+
+.pull-right[
+<p align="center"><img src="Images/print_engine.png" width=70%></p>
+]

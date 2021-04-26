@@ -329,6 +329,33 @@ my_gtsave("tbl_cross_1")
 <p align="center"><img src="Images/tbl_cross_1.png" width=90%></p>
 ]
 
+---
+# Survival outcomes with tbl_survfit()
+
+.pull-left[
+<br>
+```{r}
+library(survival)
+fit <- survfit(Surv(ttdeath, death) ~ trt, trial)
+
+tbl_survfit_1 <-
+  tbl_survfit(
+    fit, 
+    times = c(12, 24),
+    label_header = "**{time} Month**"
+  ) %>%
+  add_p()
+```
+
+```{r, include=FALSE}
+my_gtsave("tbl_survfit_1")
+```
+]
+
+.pull-right[
+<p align="center"><img src="Images/tbl_survfit_1.png" width=90%></p>
+]
+
 
 
 

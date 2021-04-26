@@ -59,29 +59,6 @@ class: inverse, center, middle
 
 .footnote[Image source: https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970]
 
-
----
-# Need reproducible, presentation-ready tables
-
-&lt;p align="center"&gt;&lt;img src="Images/table1_example.png" width=50%&gt;
-
-
-.small[
-Brierley CK, Zabor EC, Komrokji RS, DeZern AE, Roboz GJ, Brunner AM, Stone RM, Sekeres MA, Steensma DP. Low participation rates and disparities in participation in interventional clinical trials for myelodysplastic syndromes. *Cancer.* 2020 Aug 7. doi: 10.1002/cncr.33105. PMID: 32767690.
-]
-
-
-
----
-# Our solution: internal package {biostatR}
-
-&lt;img src="Images/msk-black-logo.png" width=60%&gt;
-
-.xxlarge[Department of Epidemiology &amp; Biostatistics]
-
-.large[We thought it was *so good* that we converted it into the public package {gtsummary}!]
-
-
 ---
 # {gtsummary} overview
 
@@ -499,6 +476,32 @@ tbl_cross_1 &lt;-
 &lt;p align="center"&gt;&lt;img src="Images/tbl_cross_1.png" width=90%&gt;&lt;/p&gt;
 ]
 
+---
+# Survival outcomes with tbl_survfit()
+
+.pull-left[
+&lt;br&gt;
+
+```r
+library(survival)
+fit &lt;- survfit(Surv(ttdeath, death) ~ trt, trial)
+
+tbl_survfit_1 &lt;-
+  tbl_survfit(
+    fit, 
+    times = c(12, 24),
+    label_header = "**{time} Month**"
+  ) %&gt;%
+  add_p()
+```
+
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_survfit_1.png" width=90%&gt;&lt;/p&gt;
+]
+
 
 
 
@@ -595,7 +598,7 @@ m1_tbl_2 &lt;-
 ]
 
 .pull-right[
-&lt;p align="center"&gt;&lt;img src="Images/m1_tbl_2.png" width=90%&gt;&lt;/p&gt;
+&lt;p align="center"&gt;&lt;img src="Images/m1_tbl_2.png" width=62%&gt;&lt;/p&gt;
 ]
 
 
@@ -663,13 +666,13 @@ class: inverse, center, middle
 ---
 # {gtsummary} reporting with inline_text()
 
-&lt;p align="center"&gt;&lt;img src="Images/m1_tbl_2.png" width=30%&gt;&lt;/p&gt;
+&lt;p align="center"&gt;&lt;img src="Images/tbl_uvreg.png" width=30%&gt;&lt;/p&gt;
 
 **In Code:** 
-The odds ratio for age is '` r inline_text(m1_tbl_2, variable = age)`'
+The odds ratio for age is '` r inline_text(tbl_uvreg, variable = age)`'
 
 **In Report:** 
-The odds ratio for age is 1.02 (95% CI 1.00, 1.04; p=0.087)
+The odds ratio for age is 1.02 (95% CI 1.00, 1.04; p=0.10)
 
 
 ---
@@ -1076,6 +1079,32 @@ class: inverse, center, middle
 
 &lt;p align="center"&gt;&lt;img src="Images/gtsummary_rmarkdown.png" width=90%&gt;&lt;/p&gt;
 
+---
+# {gtsummary} print engines
+
+Use any print engine to make customize table
+
+.pull-left[
+
+```r
+library(gt, warn.conflicts = FALSE)
+
+print_engine &lt;-
+  trial %&gt;%
+  select(age, grade) %&gt;%
+  tbl_summary() %&gt;%
+  as_gt() %&gt;%
+  cols_width(label ~ px(300)) %&gt;%
+  cols_align(columns = vars(stat_0), 
+             align = "left")
+```
+
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/print_engine.png" width=70%&gt;&lt;/p&gt;
+]
 
 
 ---
@@ -1139,7 +1168,138 @@ remotes::install_github("ddsjoberg/gtsummary")
 &lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt; @statistishdan,    &lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; @ddsjoberg
 ]
 
+---
+# gtsummary object
 
+
+```r
+tbl &lt;- tbl_summary(trial, by = trt, include = c(age, trt)) %&gt;% add_p()
+tbl$table_body 
+```
+
+```
+## # A tibble: 2 x 12
+##   variable test_name var_type var_label row_type label stat_1 stat_2 test_result
+##   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;list&gt;     
+## 1 age      wilcox.t~ continu~ Age       label    Age   46 (3~ 48 (3~ &lt;named lis~
+## 2 age      wilcox.t~ continu~ Age       missing  Unkn~ 7      4      &lt;NULL&gt;     
+## # ... with 3 more variables: statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, alternative &lt;chr&gt;
+```
+
+---
+# gtsummary object
+
+
+```r
+names(tbl$table_styling)
+```
+
+```
+## [1] "header"          "footnote"        "footnote_abbrev" "text_format"    
+## [5] "fmt_missing"     "fmt_fun"         "cols_merge"
+```
+
+```r
+tbl$table_styling
+```
+
+```
+## $header
+## # A tibble: 12 x 7
+##    column  hide  align  interpret_label label  interpret_spanni~ spanning_header
+##    &lt;chr&gt;   &lt;lgl&gt; &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;             &lt;chr&gt;          
+##  1 variab~ TRUE  center gt::md          varia~ gt::md            &lt;NA&gt;           
+##  2 test_n~ TRUE  center gt::md          test_~ gt::md            &lt;NA&gt;           
+##  3 var_ty~ TRUE  center gt::md          var_t~ gt::md            &lt;NA&gt;           
+##  4 var_la~ TRUE  center gt::md          var_l~ gt::md            &lt;NA&gt;           
+##  5 row_ty~ TRUE  center gt::md          row_t~ gt::md            &lt;NA&gt;           
+##  6 label   FALSE left   gt::md          **Cha~ gt::md            &lt;NA&gt;           
+##  7 stat_1  FALSE center gt::md          **Dru~ gt::md            &lt;NA&gt;           
+##  8 stat_2  FALSE center gt::md          **Dru~ gt::md            &lt;NA&gt;           
+##  9 test_r~ TRUE  center gt::md          test_~ gt::md            &lt;NA&gt;           
+## 10 statis~ TRUE  center gt::md          stati~ gt::md            &lt;NA&gt;           
+## 11 p.value FALSE center gt::md          **p-v~ gt::md            &lt;NA&gt;           
+## 12 altern~ TRUE  center gt::md          alter~ gt::md            &lt;NA&gt;           
+## 
+## $footnote
+## # A tibble: 3 x 4
+##   column  rows      text_interpret footnote              
+##   &lt;chr&gt;   &lt;list&gt;    &lt;chr&gt;          &lt;chr&gt;                 
+## 1 stat_1  &lt;quosure&gt; gt::md         Median (IQR)          
+## 2 stat_2  &lt;quosure&gt; gt::md         Median (IQR)          
+## 3 p.value &lt;quosure&gt; gt::md         Wilcoxon rank sum test
+## 
+## $footnote_abbrev
+## # A tibble: 0 x 4
+## # ... with 4 variables: column &lt;chr&gt;, rows &lt;list&gt;, text_interpret &lt;chr&gt;,
+## #   footnote &lt;chr&gt;
+## 
+## $text_format
+## # A tibble: 1 x 4
+##   column rows       format_type undo_text_format
+##   &lt;chr&gt;  &lt;list&gt;     &lt;chr&gt;       &lt;lgl&gt;           
+## 1 label  &lt;language&gt; indent      FALSE           
+## 
+## $fmt_missing
+## # A tibble: 0 x 3
+## # ... with 3 variables: column &lt;chr&gt;, rows &lt;list&gt;, symbol &lt;chr&gt;
+## 
+## $fmt_fun
+## # A tibble: 1 x 3
+##   column  rows      fmt_fun
+##   &lt;chr&gt;   &lt;list&gt;    &lt;list&gt; 
+## 1 p.value &lt;quosure&gt; &lt;fn&gt;   
+## 
+## $cols_merge
+## # A tibble: 0 x 3
+## # ... with 3 variables: column &lt;chr&gt;, rows &lt;list&gt;, pattern &lt;chr&gt;
+```
+
+---
+# gtsummary object
+
+.pull-left[
+```
+modify_table_styling(
+  x,
+  columns,
+  rows = NULL,
+  label = NULL,
+  spanning_header = NULL,
+  hide = NULL,
+  footnote = NULL,
+  footnote_abbrev = NULL,
+  align = NULL,
+  missing_symbol = NULL,
+  fmt_fun = NULL,
+  text_format = NULL,
+  undo_text_format = FALSE,
+  text_interpret = c("md", "html"),
+  cols_merge_pattern = NULL
+)
+```
+]
+
+.large[
+.pull-right[
+`modify_header()` 
+&lt;br&gt;
+`modify_footnote()` 
+&lt;br&gt;
+`modify_spanning_header()` 
+&lt;br&gt;
+`modify_caption()` 
+&lt;br&gt;
+`modify_column_hide()` 
+&lt;br&gt;
+`modify_column_unhide()` 
+&lt;br&gt;
+`modify_fmt_fun()`
+&lt;br&gt;
+&lt;br&gt;
+`modify_table_body()`
+]
+]
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

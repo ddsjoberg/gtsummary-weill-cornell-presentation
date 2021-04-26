@@ -81,7 +81,7 @@ my_gtsave("m1_tbl_2")
 ]
 
 .pull-right[
-<p align="center"><img src="Images/m1_tbl_2.png" width=90%></p>
+<p align="center"><img src="Images/m1_tbl_2.png" width=62%></p>
 ]
 
 

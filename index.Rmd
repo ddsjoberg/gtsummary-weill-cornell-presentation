@@ -102,5 +102,65 @@ class: inverse, center, title-slide, middle
 ```{r child='09-summary.Rmd'}
 ```
 
+---
+# gtsummary object
 
+```{r}
+tbl <- tbl_summary(trial, by = trt, include = c(age, trt)) %>% add_p()
+tbl$table_body 
+```
+
+---
+# gtsummary object
+
+```{r}
+names(tbl$table_styling)
+tbl$table_styling
+```
+
+---
+# gtsummary object
+
+.pull-left[
+```
+modify_table_styling(
+  x,
+  columns,
+  rows = NULL,
+  label = NULL,
+  spanning_header = NULL,
+  hide = NULL,
+  footnote = NULL,
+  footnote_abbrev = NULL,
+  align = NULL,
+  missing_symbol = NULL,
+  fmt_fun = NULL,
+  text_format = NULL,
+  undo_text_format = FALSE,
+  text_interpret = c("md", "html"),
+  cols_merge_pattern = NULL
+)
+```
+]
+
+.large[
+.pull-right[
+`modify_header()` 
+<br>
+`modify_footnote()` 
+<br>
+`modify_spanning_header()` 
+<br>
+`modify_caption()` 
+<br>
+`modify_column_hide()` 
+<br>
+`modify_column_unhide()` 
+<br>
+`modify_fmt_fun()`
+<br>
+<br>
+`modify_table_body()`
+]
+]
 

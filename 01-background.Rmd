@@ -22,29 +22,6 @@ class: inverse, center, middle
 
 .footnote[Image source: https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970]
 
-
----
-# Need reproducible, presentation-ready tables
-
-<p align="center"><img src="Images/table1_example.png" width=50%>
-
-
-.small[
-Brierley CK, Zabor EC, Komrokji RS, DeZern AE, Roboz GJ, Brunner AM, Stone RM, Sekeres MA, Steensma DP. Low participation rates and disparities in participation in interventional clinical trials for myelodysplastic syndromes. *Cancer.* 2020 Aug 7. doi: 10.1002/cncr.33105. PMID: 32767690.
-]
-
-
-
----
-# Our solution: internal package {biostatR}
-
-<img src="Images/msk-black-logo.png" width=60%>
-
-.xxlarge[Department of Epidemiology & Biostatistics]
-
-.large[We thought it was *so good* that we converted it into the public package {gtsummary}!]
-
-
 ---
 # {gtsummary} overview
 
