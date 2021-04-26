@@ -477,10 +477,34 @@ tbl_cross_1 &lt;-
 ]
 
 ---
-# Survival outcomes with tbl_survfit()
+# Survey data with tbl_svysummary()
 
 .pull-left[
 &lt;br&gt;
+
+```r
+tbl_svysummary &lt;-
+  survey::svydesign(
+    ids = ~1, 
+    data = as.data.frame(Titanic), 
+    weights = ~Freq
+  ) %&gt;%
+  tbl_svysummary(by = Survived) %&gt;%
+  add_p() %&gt;%
+  modify_spanning_header(
+    all_stat_cols() ~ "**Survived**")
+```
+
+
+]
+
+.pull-right[
+&lt;p align="center"&gt;&lt;img src="Images/tbl_svysummary.png" width=70%&gt;&lt;/p&gt;
+]
+
+---
+# Survival outcomes with tbl_survfit()
+
 
 ```r
 library(survival)
@@ -496,11 +520,9 @@ tbl_survfit_1 &lt;-
 ```
 
 
-]
 
-.pull-right[
-&lt;p align="center"&gt;&lt;img src="Images/tbl_survfit_1.png" width=90%&gt;&lt;/p&gt;
-]
+&lt;p align="center"&gt;&lt;img src="Images/tbl_survfit_1.png" width=60%&gt;&lt;/p&gt;
+
 
 
 

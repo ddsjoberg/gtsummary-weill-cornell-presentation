@@ -330,10 +330,35 @@ my_gtsave("tbl_cross_1")
 ]
 
 ---
-# Survival outcomes with tbl_survfit()
+# Survey data with tbl_svysummary()
 
 .pull-left[
 <br>
+```{r}
+tbl_svysummary <-
+  survey::svydesign(
+    ids = ~1, 
+    data = as.data.frame(Titanic), 
+    weights = ~Freq
+  ) %>%
+  tbl_svysummary(by = Survived) %>%
+  add_p() %>%
+  modify_spanning_header(
+    all_stat_cols() ~ "**Survived**")
+```
+
+```{r, include=FALSE}
+my_gtsave("tbl_svysummary")
+```
+]
+
+.pull-right[
+<p align="center"><img src="Images/tbl_svysummary.png" width=70%></p>
+]
+
+---
+# Survival outcomes with tbl_survfit()
+
 ```{r}
 library(survival)
 fit <- survfit(Surv(ttdeath, death) ~ trt, trial)
@@ -350,11 +375,9 @@ tbl_survfit_1 <-
 ```{r, include=FALSE}
 my_gtsave("tbl_survfit_1")
 ```
-]
 
-.pull-right[
-<p align="center"><img src="Images/tbl_survfit_1.png" width=90%></p>
-]
+<p align="center"><img src="Images/tbl_survfit_1.png" width=60%></p>
+
 
 
 
