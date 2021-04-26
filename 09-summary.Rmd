@@ -47,7 +47,7 @@ remotes::install_github("ddsjoberg/gtsummary")
 #### gtsummary questions?
 
 .medium[
-`r icons::fontawesome("stack-overflow")` Ask on [stackoverflow.com](stackoverflow.com). Hundreds of Qs already answered!
+`r icons::fontawesome("stack-overflow")` Ask on [stackoverflow.com](stackoverflow.com) and *use the gtsummary tag*. Hundreds of Qs already answered!
 ]
 
 <br>

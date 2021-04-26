@@ -64,7 +64,8 @@ m1_tbl_2 <-
     exponentiate = TRUE
   ) %>% 
   add_global_p() %>%
-  add_glance_table(include = c(nobs, logLik, AIC, BIC))
+  add_glance_table(
+    include = c(nobs, logLik, AIC, BIC))
 ```
 
 ```{r include = FALSE}
