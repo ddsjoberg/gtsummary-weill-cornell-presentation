@@ -40,6 +40,9 @@ my_gtsave <- function(x) {
 }    
 ```
 
+```{r xaringanExtra-freezeframe, echo=FALSE}
+xaringanExtra::use_freezeframe()
+```
 
 class: inverse, center, title-slide, middle
 

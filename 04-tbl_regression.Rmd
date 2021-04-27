@@ -110,7 +110,7 @@ tbl_uvreg <-
     y = response,
     method.args = list(family = binomial),
     exponentiate = TRUE
-    )
+  )
 ```
 
 ```{r include=FALSE}

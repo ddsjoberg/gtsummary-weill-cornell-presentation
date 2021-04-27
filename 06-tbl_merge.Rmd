@@ -36,10 +36,10 @@ A **multivariable** table:
 ```{r results = FALSE, message = FALSE}
 library(survival)
 
-tbl_mvsurv <- coxph(
-  Surv(ttdeath, death) ~ 
-    age + grade, 
-  data = trial
+tbl_mvsurv <- 
+  coxph(
+    Surv(ttdeath, death) ~ age + grade, 
+    data = trial
   ) %>% 
   tbl_regression(
     exponentiate = TRUE
@@ -74,9 +74,10 @@ A **multivariable** table:
 # tbl_merge() for side-by-side tables
 
 ```{r results = FALSE}
-tbl_surv_merge <- tbl_merge(
-  list(tbl_uvsurv, tbl_mvsurv),
-  tab_spanner = c("**Univariable**", "**Multivariable**")
+tbl_surv_merge <- 
+  tbl_merge(
+    list(tbl_uvsurv, tbl_mvsurv),
+    tab_spanner = c("**Univariable**", "**Multivariable**")
   )
 ```
 
@@ -84,7 +85,7 @@ tbl_surv_merge <- tbl_merge(
 my_gtsave("tbl_surv_merge")
 ```
 
-<p align="center"><img src="Images/tbl_surv_merge.png" width=50%></p>
+<p align="center"><img src="Images/tbl_surv_merge.png" width=48%></p>
 
 ---
 # tbl_stack() to combine vertically
@@ -95,14 +96,13 @@ An **unadjusted** model:
 
 ```{r results = FALSE}
 t3 <-
-  coxph(Surv(ttdeath, death) ~ 
-          trt, 
+  coxph(Surv(ttdeath, death) ~ trt, 
         data = trial) %>%
   tbl_regression(
     show_single_row = trt,
     label = trt ~ "Drug B vs A",
     exponentiate = TRUE
-    )
+  )
 ```
 
 ```{r include=FALSE}
@@ -125,7 +125,7 @@ t4 <-
     label = trt ~ "Drug B vs A",
     exponentiate = TRUE, 
     include = "trt"
-    )
+  )
 ```
 
 ```{r include=FALSE}
@@ -156,9 +156,10 @@ An **adjusted** model:
 # tbl_stack() to combine vertically
 
 ```{r results = FALSE}
-tbl_surv_stack <- tbl_stack(
-  list(t3, t4),
-  group_header = c("Unadjusted", "Adjusted")
+tbl_surv_stack <- 
+  tbl_stack(
+    list(t3, t4),
+    group_header = c("Unadjusted", "Adjusted")
   )
 ```
 
@@ -166,7 +167,7 @@ tbl_surv_stack <- tbl_stack(
 my_gtsave("tbl_surv_stack")
 ```
 
-<p align="center"><img src="Images/tbl_surv_stack.png" width=40%></p>
+<p align="center"><img src="Images/tbl_surv_stack.png" width=38%></p>
 
 
 ---

@@ -88,9 +88,9 @@ my_gtsave("tbl_summary_2")
 .xlarge[
 `tbl_summary()` objects can also be updated using related functions.
 
-- `add_*()` add additional column of statistics or information, e.g. p-values, q-values, overall statistics, N obs., and more
+- `add_*()` add additional column of statistics or information, e.g. p-values, q-values, overall statistics, treatment differences, N obs., and more
 
-- `modify_*()` modify table headers, spanning headers, and footnotes
+- `modify_*()` modify table headers, spanning headers, footnotes, and more
 
 - `bold_*()/italicize_*()` style labels, variable levels, significant p-values
 

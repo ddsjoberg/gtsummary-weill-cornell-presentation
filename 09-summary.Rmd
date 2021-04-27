@@ -34,25 +34,13 @@ remotes::install_github("ddsjoberg/gtsummary")
 ---
 # Thank you
 
-{gtsummary} authors/contributors: Daniel Sjoberg (Maintainer), Karissa Whiting, Michael Curry, Joseph Larmarange, Emily Zabor
-
-<img src="Images/sjoberg.jpg" width=20%>
-<img src="Images/whiting.jpg" width=20%>
-<img src="Images/curry.jpg" width=20%>
-<img src="Images/larmarange.jpg" width=13.5%>
-<img src="Images/zabor.jpg" width=20%>
-
-(not pictured): Margaret Hannum, Esther Drill, Jessica Flynn, Stephanie Lobaugh, Gustavo Zapata Wainberg
+<img src = "https://github.com/ddsjoberg/gtsummary/raw/master/data-raw/misc_files/tbl_summary_demo1.gif" alt = "animated" width = "100%">
 
 #### gtsummary questions?
 
 .medium[
 `r icons::fontawesome("stack-overflow")` Ask on [stackoverflow.com](stackoverflow.com) and *use the gtsummary tag*. Hundreds of Qs already answered!
-]
-
-<br>
-<br>
-
-.medium[
 `r icons::fontawesome("twitter")` @statistishdan,    `r icons::fontawesome("github")` @ddsjoberg
+
 ]
+
